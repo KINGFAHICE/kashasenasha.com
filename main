@@ -1,0 +1,33 @@
+
+emailButton.addEventListener('click', () => {
+  // Try to open mail app
+  window.location.href = `mailto:${yourEmail}`;
+
+  // Show fallback after 1 second if mail app doesn't open
+  setTimeout(() => {
+    fallbackForm.style.display = 'block';
+  }, 1000);
+});
+
+// Handle fallback form submission
+contactForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // For demo: just show a success message
+  // Replace this with Formspree/EmailJS integration for real emails
+  formMessage.style.display = 'block';
+  contactForm.reset();
+});
+ 
+const phoneLink = document.getElementById('phoneLink');
+
+phoneLink.addEventListener('click', (e) => {
+  // If on desktop (screen width > 768px), copy number instead of dialing
+  if (window.innerWidth > 768) {
+    e.preventDefault();
+    const number = phoneLink.textContent;
+    navigator.clipboard.writeText(number).then(() => {
+      alert(`Phone number copied: ${number}`);
+    });
+  }
+});
