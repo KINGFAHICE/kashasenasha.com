@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Place an Order</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="main.css">
+    
+</head>
+<body>
+    <section id="Home">
+    </div><!---nav bar section--
+<nav class="navbar">
+  <div class="nav-inner">
+
+    <a href="main.html" class="logo-link">
+      <img src="resources/logo.png" alt="KIL Logo 404" class="logo">
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#catalogue" class="nav-link">Catalogue</a>
+      <a href="placeanorder.html" class="nav-link">Place Order</a>
+      <a href="about.html" class="nav-link">About Us</a>
+      <a href="contactpage.html" class="nav-link">Contact</a>
+    </div>
+  </div>
+</nav>
+    end of nav bar section---> 
+
+    <main class="container" aria-labelledby="title">
+        <h1 id="title">PLACE AND ORDER</h1>
+        </section>
+        <form id="orderForm" novalidate>
+            <section>
+                <fieldset class="card" aria-label="Order details">
+                    <label for="product">Product</label>
+                    <select id="product" required>
+                        <option value="" disabled selected>Select a mat type</option>
+                        <option value='{"name":"Classic T-Shirt","price":0.ugx}'>missing data</option>
+                        <option value='{"name":"Hoodie","price":0.ugx}'>misisng data</option>
+                        <option value='{"name":"Sticker Pack","price":0.ugx}'>missing data</option>
+                    </select>
+                    
+
+                    <div style="margin-top:12px" class="row">
+                        <div>
+                            <label for="qty">Quantity</label>
+                            <input id="qty" type="number" min="1" value="1" required />
+                        </div>
+                        <div>
+                            <label for="variant"> Variant</label>
+                            <select id="variant">
+                                <option value="One Size">no dat</option>
+                                <option value="S">no data</option>
+                                <option value="M" selected>no data</option>
+                                <option value="L">no data</option>
+                                <option value="XL">no data</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr style="margin:16px 0;border:0;border-top:1px solid #044b39"
+                   />
+
+                    <label for="name">Full name</label>
+                    <input id="name" type="text" autocomplete="name" required />
+
+                    <label for="email" style="margin-top:12px">Email</label>
+                    <input id="email" type="email" autocomplete="email" required />
+
+                    <label for="phone" style="margin-top:12px">Phone</label>
+                    <input id="phone" type="tel" autocomplete="tel" />
+
+                    <label for="address" style="margin-top:12px">Delivering place</label>
+                    <textarea id="address" rows="3" placeholder="Street, City, State / Province, Postal code" required></textarea>
+                </fieldset>
+
+                <fieldset class="card" style="margin-top:16px" aria-label="Payment">
+                    <label>Payment method</label>
+                    <div style="display:flex;gap:12px;margin-top:6px">
+                        <label><input type="radio" name="payment" value="card" checked /> Card</label>
+                        <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
+                        <label><input type="radio" name="payment"  value="mobile money"/>Mobile Money</label>
+                    </div>
+
+                    <div id="cardFields" style="margin-top:12px">
+                        <label for="cardNumber">Card number</label>
+                        <input id="cardNumber" type="text" inputmode="numeric" placeholder="•••• •••• •••• ••••" maxlength="19" />
+
+                        <div class="row" style="margin-top:8px">
+                            <div>
+                                <label for="exp">Expiry (MM/YY)</label>
+                                <input id="exp" type="text" placeholder="MM/YY" maxlength="5" />
+                            </div>
+                            <div>
+                                <label for="cvc">CVC</label>
+                                <input id="cvc" type="text" maxlength="4" placeholder="123" />
+                            </div>
+                        </div>
+                        <div class="help"></div>
+                    </div>
+
+                    <div style="margin-top:12px" class="actions">
+                        <button type="submit">Place order</button>
+                        <button type="button" class="secondary" id="resetBtn">Reset</button>
+                    </div>
+                </fieldset>
+            </section>
+
+            <aside>
+                <div class="order-summary" aria-live="polite" id="summaryBox">
+                    <div class="summary-line"><span>Item</span><span id="summaryItem">—</span></div>
+                    <div class="summary-line"><span>Variant</span><span id="summaryVariant">—</span></div>
+                    <div class="summary-line"><span>Quantity</span><span id="summaryQty">—</span></div>
+                    <div class="summary-line"><span>Subtotal</span><span id="summarySubtotal">0.00 UGX</span></div>
+                    <div class="summary-line"><span>Delivering</span><span id="summaryShip">0.00 UGX</span></div>
+                    <div class="summary-line total"><span>Total</span><span id="summaryTotal">0.00 UGX</span></div>
+                    <div class="help" style="margin-top:12px">Free shipping for orders over 10M UGX.</div>
+                </div>
+
+                <div id="message" class="hidden success" role="status"></div>
+            </aside>
+        </form>
+    </main>
+    <br><br>
+    <footer class="footer">
+  <div class="footer-container">
+    <!-- GROUP 1: Company -->
+    <div class="footer-group footer-company">
+      <h2>Kashasenashe Investments Limited</h2>
+      <p>Your trusted partner in providing high-quality plastic printed mats for mosques and special occasions across Uganda.</p>
+      <p class="footer-copy">&copy; 2026 Kashasenashe Investments Limited. All rights reserved.</p>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- GROUP 2: Quick Links -->
+    <div class="footer-group footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#Home">Home</a></li>
+        <li><a href="catalogepage.html">Catalogue</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contactpage.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- GROUP 3: Legal & Newsletter -->
+    <div class="footer-group footer-legal">
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms and privacy.html">Terms of Service</a></li>
+      </ul>
+
+      <div class="footer-newsletter">
+        <h3>Subscribe for Updates</h3>
+        <form id="newsletterform">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- GROUP 4: Contact -->
+    <div class="footer-group footer-contact">
+      <h3>Contact Us</h3>
+      <p><i class="fa-regular fa-envelope"></i> <a href="mailto:kashasenasha27@gmail.com">kashasenasha27@gmail.com</a></p>
+      <p><strong>Phone:</strong> <a href="tel:+256702445852">+256 702 445 852</a></p>
+      <p><strong>Address:</strong><br>Ben Kiwanuka Street,<br>Nagatule Plaza,<br>Rooms 10, 11 &amp; 12,<br>Kampala, Uganda</p>
+      <p><i class="fa-solid fa-location-dot"></i> <a href="https://www.google.com/maps/dir//8H7G%2BQ34+Nagatule+Arcade,+Ben+Kiwanuka+Rd,+Kampala/" target="_blank" rel="noopener">View Location on Map</a></p>
+    </div>
+  </div>
+</footer>
+    <script src="js.js"></script>
+</body>
+</html>
