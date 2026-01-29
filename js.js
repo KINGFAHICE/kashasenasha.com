@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  
 
-});
 const form = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
 
@@ -184,12 +184,12 @@ $(document).ready(function() {
         const summaryShip = document.getElementById('summaryShip');
         const summaryTotal = document.getElementById('summaryTotal');
         const cardFields = document.getElementById('cardFields'); 
-        //const form = document.getElementById('orderForm');
+        const orderForm = document.getElementById('orderForm');
         const message = document.getElementById('message');
         const resetBtn = document.getElementById('resetBtn');
 
         function parseProduct() {
-            try { return JSON.parse(productEl.value || 'null'); }
+            try { return productEl ? JSON.parse(productEl.value || 'null') : null; }
             catch { return null; }
         }
 
@@ -197,60 +197,72 @@ $(document).ready(function() {
 
         function updateSummary() {
             const prod = parseProduct();
-            const qty = Math.max(1, Number(qtyEl.value) || 1);
-            const variant = variantEl.value || '—';
-            summaryItem.textContent = prod ? prod.name : '—';
-            summaryVariant.textContent = variant;
-            summaryQty.textContent = String(qty);
+            const qty = Math.max(1, Number(qtyEl ? qtyEl.value : 1) || 1);
+            const variant = variantEl ? variantEl.value || '—' : '—';
+            if (summaryItem) summaryItem.textContent = prod ? prod.name : '—';
+            if (summaryVariant) summaryVariant.textContent = variant;
+            if (summaryQty) summaryQty.textContent = String(qty);
             const price = prod ? prod.price : 0;
             const subtotal = price * qty;
             let shipping = subtotal > 0 && subtotal < 50 ? 5.00 : 0.00;
             if (subtotal === 0) shipping = 0.00;
-            summarySubtotal.textContent = formatUSD(subtotal);
-            summaryShip.textContent = formatUSD(shipping);
-            summaryTotal.textContent = formatUSD(subtotal + shipping);
+            if (summarySubtotal) summarySubtotal.textContent = formatUSD(subtotal);
+            if (summaryShip) summaryShip.textContent = formatUSD(shipping);
+            if (summaryTotal) summaryTotal.textContent = formatUSD(subtotal + shipping);
         }
 
-        productEl.addEventListener('change', updateSummary);
-        qtyEl.addEventListener('input', updateSummary);
-        variantEl.addEventListener('change', updateSummary);
+        if (productEl) productEl.addEventListener('change', updateSummary);
+        if (qtyEl) qtyEl.addEventListener('input', updateSummary);
+        if (variantEl) variantEl.addEventListener('change', updateSummary);
 
         // Toggle payment fields
-        document.querySelectorAll('input[name="payment"]').forEach(radio => {
-            radio.addEventListener('change', e => {
-                cardFields.style.display = e.target.value === 'card' ? 'block' : 'none';
+        if (document.querySelectorAll) {
+          document.querySelectorAll('input[name="payment"]').forEach(radio => {
+              radio.addEventListener('change', e => {
+                  if (cardFields) cardFields.style.display = e.target.value === 'card' ? 'block' : 'none';
+              });
+          });
+        }
+
+        if (orderForm) {
+            orderForm.addEventListener('submit', e => {
+                e.preventDefault();
+                if (message) message.classList.add('hidden');
+                // Basic validation
+                const prod = parseProduct();
+                const nameEl = document.getElementById('name');
+                const emailEl = document.getElementById('email');
+                const addressEl = document.getElementById('address');
+                const name = nameEl ? nameEl.value.trim() : '';
+                const email = emailEl ? emailEl.value.trim() : '';
+                const address = addressEl ? addressEl.value.trim() : '';
+                if (!prod) return alert('Please select a product.');
+                if (!name || !email || !address) return alert('Please fill required contact and address fields.');
+                // Fake process
+                const qty = Math.max(1, Number(qtyEl ? qtyEl.value : 1) || 1);
+                const subtotal = prod.price * qty;
+                const shipping = subtotal > 0 && subtotal < 50 ? 5.00 : 0.00;
+                const total = subtotal + shipping;
+                if (message) {
+                    message.textContent = `Thanks, ${name}! Your order for ${qty}× ${prod.name} (${variantEl ? variantEl.value : '—'}) has been received. Total: ${formatUSD(total)}. A confirmation was sent to ${email}.`;
+                    message.classList.remove('hidden');
+                }
+                // Optionally, clear form or simulate redirect...
             });
-        });
+        }
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            message.classList.add('hidden');
-            // Basic validation
-            const prod = parseProduct();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const address = document.getElementById('address').value.trim();
-            if (!prod) return alert('Please select a product.');
-            if (!name || !email || !address) return alert('Please fill required contact and address fields.');
-            // Fake process
-            const qty = Math.max(1, Number(qtyEl.value) || 1);
-            const subtotal = prod.price * qty;
-            const shipping = subtotal > 0 && subtotal < 50 ? 5.00 : 0.00;
-            const total = subtotal + shipping;
-            message.textContent = `Thanks, ${name}! Your order for ${qty}× ${prod.name} (${variantEl.value}) has been received. Total: ${formatUSD(total)}. A confirmation was sent to ${email}.`;
-            message.classList.remove('hidden');
-            // Optionally, clear form or simulate redirect...
-        });
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                if (orderForm) orderForm.reset();
+                if (cardFields) cardFields.style.display = 'block';
+                updateSummary();
+                if (message) message.classList.add('hidden');
+            });
+        }
 
-        resetBtn.addEventListener('click', () => {
-            form.reset();
-            cardFields.style.display = 'block';
-            updateSummary();
-            message.classList.add('hidden');
+                // Initialize
+                updateSummary();
         });
-
-        // Initialize
-        updateSummary();
 
 
 
