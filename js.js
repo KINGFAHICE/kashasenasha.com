@@ -1,268 +1,175 @@
-document.addEventListener('DOMContentLoaded', () => {
+//        preloader  //
+let fakeProgress = 0;
+const preloader = document.getElementById('preloader');
 
-  /* =========================
-     NAVBAR
-  ========================= */
-  const navbar = document.querySelector('.navbar');
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  const navLinkItems = document.querySelectorAll('.nav-link');
+// Simulated loading progress
+const progressInterval = setInterval(() => {
+  fakeProgress += Math.random() * 15; // smooth increments
 
-  let lastScrollTop = 0;
+  if (fakeProgress >= 75) {
+    clearInterval(progressInterval);
 
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-
-  navLinkItems.forEach(link => {
-    link.addEventListener('click', () => {
-      navToggle?.classList.remove('open');
-      navLinks?.classList.remove('open');
-
-      navLinkItems.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-    });
-  });
-
-  document.addEventListener('click', (e) => {
-    if (navbar && !navbar.contains(e.target)) {
-      navToggle?.classList.remove('open');
-      navLinks?.classList.remove('open');
-    }
-  });
-
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (navbar) {
-      if (scrollTop > lastScrollTop && scrollTop > 120) {
-        navbar.classList.add('hide');
-      } else {
-        navbar.classList.remove('hide');
-      }
-    }
-
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-  });
-
-  /* =========================
-     PRELOADER
-  ========================= */
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
     preloader.style.opacity = '0';
+    preloader.style.pointerEvents = 'none';
+
     setTimeout(() => {
       preloader.remove();
     }, 500);
   }
+}, 200);
 
-  /* =========================
-     EMAIL FALLBACK
-  ========================= */
-  const emailButton = document.getElementById('emailButton');
-  const fallbackForm = document.getElementById('fallbackForm');
-  const contactForm = document.getElementById('contactForm');
-  const formMessage = document.getElementById('formMessage');
-  const yourEmail = 'example@example.com'; // change this
-
-  if (emailButton) {
-    emailButton.addEventListener('click', () => {
-      window.location.href = `mailto:${yourEmail}`;
-      setTimeout(() => {
-        if (fallbackForm) fallbackForm.style.display = 'block';
-      }, 1000);
-    });
-  }
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (formMessage) formMessage.style.display = 'block';
-      contactForm.reset();
-    });
-  }
-
-  /* =========================
-     PHONE COPY (DESKTOP)
-  ========================= */
-  const phoneLink = document.getElementById('phoneLink');
-  if (phoneLink) {
-    phoneLink.addEventListener('click', (e) => {
-      if (window.innerWidth > 768) {
+// Safety fallback (in case page loads fast)
+window.addEventListener('load', () => {
+  fakeProgress = 75;
+});
+// End of preloder js       //
+document.addEventListener('DOMContentLoaded', () => {
+  // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        navigator.clipboard.writeText(phoneLink.textContent)
-          .then(() => alert('Phone number copied'));
-      }
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
-  }
-  
 
-const form = document.getElementById('contact-form');
-const formStatus = document.getElementById('form-status');
-
-form.addEventListener('submit', function(e) {
-  e.preventDefault(); // stop actual submission
-
-  let isValid = true;
-
-  // Clear previous status message
-  formStatus.textContent = '';
-  formStatus.style.color = '';
-
-  // Loop through all required fields
-  form.querySelectorAll('[required]').forEach(input => {
-    const errorDiv = form.querySelector(`.error[data-for="${input.name}"]`);
-
-    if (!input.value || (input.type === 'checkbox' && !input.checked)) {
-      isValid = false;
-      errorDiv.textContent = 'This field is required';
-    } else {
-      errorDiv.textContent = '';
+    // Mobile menu toggle (basic implementation)
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('.nav');
+    
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        nav.style.position = 'absolute';
+        nav.style.top = '80%';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.flexDirection = 'column';
+        nav.style.background = 'var(--primary)';
+        nav.style.padding = '1rem';
+        nav.style.gap = '1rem';
+      });
     }
-  });
 
-  if (!isValid) {
-    // At least one field is missing
-    formStatus.textContent = 'Please fill in all required fields.';
-    formStatus.style.color = 'red';
-    return;
-  }
+ 
+  /* =========================
+   contact for js
+  ========================= */
+    (function() {
+      const form = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const successMessage = document.getElementById('successMessage');
+      const resetBtn = document.getElementById('resetBtn');
 
-  // All fields valid → show success message
-  formStatus.textContent = 'Message sent successfully! We’ll reply in less 24hours.';
-  formStatus.style.color = 'green';
+      // Validation functions
+      function validateName(value) {
+        const trimmed = value.trim();
+        if (!trimmed) return 'Name is required';
+        if (trimmed.length > 100) return 'Name must be less than 100 characters';
+        return '';
+      }
 
-  // Optional: reset form after success
-  form.reset();
-});
+      function validateEmail(value) {
+        const trimmed = value.trim();
+        if (!trimmed) return 'Email is required';
+        if (trimmed.length > 255) return 'Email must be less than 255 characters';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(trimmed)) return 'Invalid email address';
+        return '';
+      }
 
-$(document).ready(function() {
-  // Initialize Select2 with flags
-  
-  $('#country-select').select2({
-    templateResult: formatCountry,
-    templateSelection: formatCountry,
-    minimumResultsForSearch: 5 // optional: show search box
-  });
+      function validateSubject(value) {
+        const trimmed = value.trim();
+        if (!trimmed) return 'Subject is required';
+        if (trimmed.length > 200) return 'Subject must be less than 200 characters';
+        return '';
+      }
 
-  // Auto-paste country code in phone input when selected
-  $('#country-select').on('change', function() {
-    const code = $(this).val();
-    const phoneInput = $('#phone');
-    const currentValue = phoneInput.val();
+      function validateMessage(value) {
+        const trimmed = value.trim();
+        if (!trimmed) return 'Message is required';
+        if (trimmed.length > 1000) return 'Message must be less than 1000 characters';
+        return '';
+      }
 
-    // If input already starts with a code, replace it
-    const updatedValue = currentValue.replace(/^\+\d+/, code);
-    phoneInput.val(updatedValue || code);
-    phoneInput.focus(); // focus so user can continue typing
-  });
-});
-
-$(document).ready(function() {
-  $('#country-select').on('change', function() {
-    const code = $(this).val();
-    const phoneInput = $('#phone');
-    const currentValue = phoneInput.val();
-
-    // If input already starts with a code, replace it
-    const updatedValue = currentValue.replace(/^\+\d+/, code);
-    phoneInput.val(updatedValue || code);
-    phoneInput.focus(); // user can start typing immediately
-  });
-});
-// Quick order page behavior: update summary, simple validation, fake submit
-        const productEl = document.getElementById('product');
-        const qtyEl = document.getElementById('qty');
-        const variantEl = document.getElementById('variant');
-        const summaryItem = document.getElementById('summaryItem');
-        const summaryVariant = document.getElementById('summaryVariant');
-        const summaryQty = document.getElementById('summaryQty');
-        const summarySubtotal = document.getElementById('summarySubtotal');
-        const summaryShip = document.getElementById('summaryShip');
-        const summaryTotal = document.getElementById('summaryTotal');
-        const cardFields = document.getElementById('cardFields'); 
-        const orderForm = document.getElementById('orderForm');
-        const message = document.getElementById('message');
-        const resetBtn = document.getElementById('resetBtn');
-
-        function parseProduct() {
-            try { return productEl ? JSON.parse(productEl.value || 'null') : null; }
-            catch { return null; }
+      function showError(inputId, message) {
+        const input = document.getElementById(inputId);
+        const errorEl = document.getElementById(inputId + 'Error');
+        if (message) {
+          input.classList.add('error');
+          errorEl.textContent = message;
+        } else {
+          input.classList.remove('error');
+          errorEl.textContent = '';
         }
+      }
 
-        function formatUSD(n){ return '$' + n.toFixed(2); }
-
-        function updateSummary() {
-            const prod = parseProduct();
-            const qty = Math.max(1, Number(qtyEl ? qtyEl.value : 1) || 1);
-            const variant = variantEl ? variantEl.value || '—' : '—';
-            if (summaryItem) summaryItem.textContent = prod ? prod.name : '—';
-            if (summaryVariant) summaryVariant.textContent = variant;
-            if (summaryQty) summaryQty.textContent = String(qty);
-            const price = prod ? prod.price : 0;
-            const subtotal = price * qty;
-            let shipping = subtotal > 0 && subtotal < 50 ? 5.00 : 0.00;
-            if (subtotal === 0) shipping = 0.00;
-            if (summarySubtotal) summarySubtotal.textContent = formatUSD(subtotal);
-            if (summaryShip) summaryShip.textContent = formatUSD(shipping);
-            if (summaryTotal) summaryTotal.textContent = formatUSD(subtotal + shipping);
-        }
-
-        if (productEl) productEl.addEventListener('change', updateSummary);
-        if (qtyEl) qtyEl.addEventListener('input', updateSummary);
-        if (variantEl) variantEl.addEventListener('change', updateSummary);
-
-        // Toggle payment fields
-        if (document.querySelectorAll) {
-          document.querySelectorAll('input[name="payment"]').forEach(radio => {
-              radio.addEventListener('change', e => {
-                  if (cardFields) cardFields.style.display = e.target.value === 'card' ? 'block' : 'none';
-              });
-          });
-        }
-
-        if (orderForm) {
-            orderForm.addEventListener('submit', e => {
-                e.preventDefault();
-                if (message) message.classList.add('hidden');
-                // Basic validation
-                const prod = parseProduct();
-                const nameEl = document.getElementById('name');
-                const emailEl = document.getElementById('email');
-                const addressEl = document.getElementById('address');
-                const name = nameEl ? nameEl.value.trim() : '';
-                const email = emailEl ? emailEl.value.trim() : '';
-                const address = addressEl ? addressEl.value.trim() : '';
-                if (!prod) return alert('Please select a product.');
-                if (!name || !email || !address) return alert('Please fill required contact and address fields.');
-                // Fake process
-                const qty = Math.max(1, Number(qtyEl ? qtyEl.value : 1) || 1);
-                const subtotal = prod.price * qty;
-                const shipping = subtotal > 0 && subtotal < 50 ? 5.00 : 0.00;
-                const total = subtotal + shipping;
-                if (message) {
-                    message.textContent = `Thanks, ${name}! Your order for ${qty}× ${prod.name} (${variantEl ? variantEl.value : '—'}) has been received. Total: ${formatUSD(total)}. A confirmation was sent to ${email}.`;
-                    message.classList.remove('hidden');
-                }
-                // Optionally, clear form or simulate redirect...
-            });
-        }
-
-        if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                if (orderForm) orderForm.reset();
-                if (cardFields) cardFields.style.display = 'block';
-                updateSummary();
-                if (message) message.classList.add('hidden');
-            });
-        }
-
-                // Initialize
-                updateSummary();
+      // Clear error on input
+      ['name', 'email', 'subject', 'message'].forEach(function(id) {
+        const input = document.getElementById(id);
+        input.addEventListener('input', function() {
+          showError(id, '');
         });
+      });
 
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
 
+        // Validate
+        const nameError = validateName(name);
+        const emailError = validateEmail(email);
+        const subjectError = validateSubject(subject);
+        const messageError = validateMessage(message);
+
+        showError('name', nameError);
+        showError('email', emailError);
+        showError('subject', subjectError);
+        showError('message', messageError);
+
+        if (nameError || emailError || subjectError || messageError) {
+          return;
+        }
+
+        // Disable button
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+
+        // Create WhatsApp message
+        const whatsappMessage = encodeURIComponent(
+          '*New Inquiry from Website*\n\n' +
+          '*Name:* ' + name.trim() + '\n' +
+          '*Email:* ' + email.trim() + '\n' +
+          '*Phone:* ' + (phone.trim() || 'Not provided') + '\n' +
+          '*Subject:* ' + subject.trim() + '\n\n' +
+          '*Message:*\n' + message.trim()
+        );
+
+        // Open WhatsApp
+        window.open('https://wa.me/256702445852?text=' + whatsappMessage, '_blank');
+
+        // Show success
+        form.style.display = 'none';
+        successMessage.classList.add('show');
+
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Send Message <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>';
+      });
+
+      // Reset form
+      resetBtn.addEventListener('click', function() {
+        form.reset();
+        form.style.display = 'grid';
+        successMessage.classList.remove('show');
+      });
+    })();
+  })
