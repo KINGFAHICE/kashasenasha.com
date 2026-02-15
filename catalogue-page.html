@@ -3,124 +3,1226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kashasenasha Investments Limited | Trade & Commerce | Kampala Uganda</title>
-  <meta name="description" content="Kashasenasha Investments Limited - Your trusted partner for premium Islamic products, prayer mats, Qurans, and modest apparel. Wholesale supplier at Nagatule Plaza, Kampala Uganda.">
-  <link rel="canonical" href="https://kashasenasha.com/">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<meta name="description" content="Kashasenashe Investments Limited is a company that deals with the sale of plastic printed mats, Muslim, moslem mats for mosques and other occasions, based in Uganda-Kampala.">
-        <meta name="keywords" content="Kashasenashe, Kashasenashe Investments Limited, mats, plastic mats, printed mats, muslim mats, moslem mats, mosque mats, Uganda mats">
-        <meta name="author" content="BlackHouseMedia">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <link rel="stylesheet" href="main.css">
-   
+  <title>Product Catalogue | Kashasenasha Investments Limited</title>
+  <style>
+    /* CSS Variables */
+    :root {
+      --primary: #1B4332;
+      --primary-light: #2D5A47;
+      --gold: #D4AF37;
+      --gold-light: #E5C158;
+      --cta: #DC2626;
+      --background: #FAFAF8;
+      --foreground: #1A1A1A;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --card: #FFFFFF;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    .logo-text h1 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    .logo-text p {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* Desktop Nav */
+    .nav-desktop {
+      display: none;
+      gap: 2rem;
+    }
+
+    .nav-desktop a {
+      text-decoration: none;
+      color: var(--foreground);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-desktop a:hover,
+    .nav-desktop a.active {
+      color: var(--gold);
+    }
+
+    .header-cta {
+      display: none;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-phone {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+      text-decoration: none;
+    }
+
+    .btn-cta {
+      background: var(--cta);
+      color: white;
+      padding: 0.625rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-cta:hover {
+      background: #B91C1C;
+      transform: translateY(-1px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .mobile-menu-btn span {
+      width: 24px;
+      height: 2px;
+      background: var(--foreground);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem;
+      z-index: 99;
+    }
+
+    .mobile-nav.open {
+      display: block;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 0.75rem 0;
+      text-decoration: none;
+      color: var(--foreground);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav a.active {
+      color: var(--gold);
+    }
+
+    .mobile-nav .btn-cta {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 140px 1rem 80px;
+      background: var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge span {
+      font-size: 0.875rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 1rem;
+    }
+
+    /* Section */
+    .catalogue-section {
+      margin-bottom: 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .section-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+
+    .section-subtitle {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* Subsection Grid */
+    .subsection-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Product Card */
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .product-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    /* Image Placeholder */
+    .image-placeholder {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--gold);
+      position: relative;
+    }
+
+    .image-placeholder .icon {
+      font-size: 3rem;
+      opacity: 0.9;
+    }
+
+    .image-placeholder .alt-text {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .image-placeholder .badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--gold);
+      color: var(--foreground);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Card Content */
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-content h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--foreground);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-content p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .card-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--foreground);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .card-btn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--cta);
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: background 0.2s;
+    }
+
+    .card-btn:hover {
+      background: #B91C1C;
+    }
+
+    /* Subsection Title */
+    .subsection-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subsection-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* Category Grid */
+    .category-wrapper {
+      margin-bottom: 2rem;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--primary);
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-section .btn-cta {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary);
+      color: white;
+      padding: 4rem 1rem 2rem;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand .logo-icon {
+      background: var(--gold);
+      color: var(--foreground);
+    }
+
+    .footer-brand .logo-text h1,
+    .footer-brand .logo-text p {
+      color: white;
+    }
+
+    .footer-brand > p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+    }
+
+    .footer h4 {
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-contact .icon {
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer-contact a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover {
+      color: var(--gold);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--gold);
+      color: var(--foreground);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--gold);
+    }
+
+    /* Responsive */
+    @media (min-width: 640px) {
+      .subsection-grid,
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-desktop {
+        display: flex;
+      }
+
+      .header-cta {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+      }
+
+      .subsection-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      }
+    }
   </style>
 </head>
 <body>
-      <!-- Preloader -->
-<div id="preloader">
-  <div class="dots-container">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
- </div>
   <!-- Header -->
   <header class="header">
-    <div class="container header-inner">
-      <a href="#" class="logo">
+    <div class="header-container">
+      <a href="/" class="logo">
         <div class="logo-icon">K</div>
-        <div class="logo-text">KASHASENASHA <span>.</span></div>
-      </a>
-      
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="#sectors">Sectors</a>
-        <a href="#products">Catalogue</a>
-        <a href="about-page.html">About</a>
-        <a href="contact-static.html">Contact</a>
-      </nav>
-<!--end of nav bar section---> 
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-        <span class="hero-badge-text">Trade &amp; Commerce</span>
+        <div class="logo-text">
+          <h1>Kashasenasha</h1>
+          <p>Investments Limited</p>
         </div>
-        
-        <h1> view our <span>Products</span></h1>
-        
-        <p>
-           Kashasenasha Investments Limited  delivers High quality products, such as premium prayer mats,men's Muslim clothing, Women and children.
-           suitable for homes,offices and everydAY use.</p>
-    
-        <div class="hero-buttons">
-          <a href="https://wa.me/256702445852?text=Hello%2C%20I%27m%20interested%20in%20wholesale%20products" class="btn btn-cta btn-xl" target="_blank">
-            Request Wholesale Quote →
-          </a>
-          <a href="#sectors" class="btn btn-gold btn-xl">
-            Explore Our Sectors
-          </a>
+      </a>
+
+      <nav class="nav-desktop">
+        <a href="/">Home</a>
+        <a href="/trade">Trade & Commerce</a>
+        <a href="/catalogue" class="active">Catalogue</a>
+        <a href="/order">Place an Order</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="tel:+256702445852" class="header-phone">
+          <span>📞</span>
+          <span>+256 702 445 852</span>
+        </a>
+        <a href="https://wa.me/256702445852" target="_blank" class="btn-cta">Get Quote</a>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="/">Home</a>
+      <a href="/trade">Trade & Commerce</a>
+      <a href="/catalogue" class="active">Catalogue</a>
+      <a href="/order">Place an Order</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact</a>
+      <a href="https://wa.me/256702445852" target="_blank" class="btn-cta">Get Quote</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>📖 Product Catalogue</span>
+      </div>
+      <h1>Our Complete <span>Catalogue</span></h1>
+      <p>Explore our premium Islamic products sourced globally for the Ugandan market. Quality you can trust.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Section 1: The Holy Quran -->
+    <section class="catalogue-section" id="quran">
+      <div class="section-header">
+        <div class="section-icon">📖</div>
+        <div>
+          <h2 class="section-title">The Holy Quran</h2>
+          <p class="section-subtitle">Premium Qurans with translations and beautiful covers</p>
         </div>
       </div>
-    </div>
+
+      <!-- Premium Covers -->
+      <div class="category-wrapper">
+        <h3 class="subsection-title">Premium Covers</h3>
+        <div class="category-grid">
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">📕</span>
+              <span class="alt-text">Premium Leather Bound Quran</span>
+              <span class="badge">Premium</span>
+            </div>
+            <div class="card-content">
+              <h3>Leather Bound Quran</h3>
+              <p>Luxurious genuine leather cover with gold embossing</p>
+              <ul class="card-features">
+                <li>Genuine leather</li>
+                <li>Gold-embossed text</li>
+                <li>Gift box included</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Leather%20Bound%20Quran" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">📗</span>
+              <span class="alt-text">Velvet Cover Quran</span>
+              <span class="badge">Elegant</span>
+            </div>
+            <div class="card-content">
+              <h3>Velvet Cover Quran</h3>
+              <p>Soft velvet exterior with ornate patterns</p>
+              <ul class="card-features">
+                <li>Premium velvet</li>
+                <li>Decorative patterns</li>
+                <li>Multiple colors</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Velvet%20Cover%20Quran" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">📘</span>
+              <span class="alt-text">Hardcover Quran</span>
+            </div>
+            <div class="card-content">
+              <h3>Hardcover Quran</h3>
+              <p>Durable hardcover for everyday use</p>
+              <ul class="card-features">
+                <li>Durable binding</li>
+                <li>Clear print</li>
+                <li>Affordable</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Hardcover%20Quran" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arabic -->
+      <div class="category-wrapper">
+        <h3 class="subsection-title">Arabic Quran</h3>
+        <div class="category-grid">
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">🕌</span>
+              <span class="alt-text">Uthmani Script Quran</span>
+              <span class="badge">Original</span>
+            </div>
+            <div class="card-content">
+              <h3>Uthmani Script Quran</h3>
+              <p>Authentic Uthmani script for precise recitation</p>
+              <ul class="card-features">
+                <li>Uthmani script</li>
+                <li>Tajweed color-coding</li>
+                <li>Various sizes</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Uthmani%20Script%20Quran" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">📿</span>
+              <span class="alt-text">Large Print Arabic Quran</span>
+            </div>
+            <div class="card-content">
+              <h3>Large Print Quran</h3>
+              <p>Easy-to-read large Arabic text</p>
+              <ul class="card-features">
+                <li>Extra-large font</li>
+                <li>Clear spacing</li>
+                <li>Senior-friendly</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Large%20Print%20Quran" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Translations -->
+      <div class="category-wrapper">
+        <h3 class="subsection-title">Translations</h3>
+        <div class="category-grid">
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">🇺🇬</span>
+              <span class="alt-text">Luganda Translation Quran</span>
+              <span class="badge">Local</span>
+            </div>
+            <div class="card-content">
+              <h3>Luganda Translation</h3>
+              <p>Arabic with Luganda translation for Ugandan readers</p>
+              <ul class="card-features">
+                <li>Arabic + Luganda</li>
+                <li>Side-by-side text</li>
+                <li>Quality binding</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Luganda%20Translation%20Quran" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image" >
+            <img src="assets/product-mats.jpg "  alt="🕌">
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">Premium Prayer Mats</h3>
+            <p class="product-desc">High-quality plastic printed mats, perfect for mosques, events, and institutions.</p>
+            <div class="product-features">
+              <span class="product-feature">Durable</span>
+              <span class="product-feature">Bulk Orders</span>
+              <span class="product-feature">Custom Prints</span>
+            </div>
+            <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Premium%20Prayer%20Mats" target="_blank" class="card-btn">Request Quote</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="image-placeholder">
+            <span class="icon"><img src="assets/the Noble quran.jpg" alt="The Noble Quran"></span>
+            <span class="alt-text">English Translation Quran</span>
+          </div>
+            <div class="card-content">
+              <h3>English Translation</h3>
+              <p>Arabic with English translation and commentary</p>
+              <ul class="card-features">
+                <li>Arabic + English</li>
+                <li>Footnotes included</li>
+                <li>Study edition</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20English%20Translation%20Quran" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Islamic Clothes -->
+    <section class="catalogue-section" id="clothes">
+      <div class="section-header">
+        <div class="section-icon">👔</div>
+        <div>
+          <h2 class="section-title">Islamic Clothes</h2>
+          <p class="section-subtitle">Modest apparel for men, women, and children</p>
+        </div>
+      </div>
+
+      <!-- Men's Clothes -->
+      <div class="category-wrapper">
+        <h3 class="subsection-title">Men's Wear</h3>
+        <div class="category-grid">
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">👕</span>
+              <span class="alt-text">Men's Kanzu</span>
+              <span class="badge">Best Seller</span>
+            </div>
+            <div class="card-content">
+              <h3>Men's Kanzu</h3>
+              <p>Premium quality Kanzu for daily and special occasions</p>
+              <ul class="card-features">
+                <li>Premium cotton</li>
+                <li>Embroidered collar</li>
+                <li>All sizes available</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Men's%20Kanzu" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">👦</span>
+              <span class="alt-text">Boy's Kanzu</span>
+            </div>
+            <div class="card-content">
+              <h3>Boy's Kanzu</h3>
+              <p>Comfortable Kanzu for young boys</p>
+              <ul class="card-features">
+                <li>Soft fabric</li>
+                <li>Easy to wear</li>
+                <li>Ages 3-15</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Boy's%20Kanzu" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">🧢</span>
+              <span class="alt-text">Caps / Taqiyah / Kufi</span>
+            </div>
+            <div class="card-content">
+              <h3>Headwear / Caps / Taqiyah</h3>
+              <p>Traditional Islamic caps and head coverings</p>
+              <ul class="card-features">
+                <li>Kufi caps</li>
+                <li>Taqiyah</li>
+                <li>Turban (Imamah)</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Islamic%20Headwear" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Women's Clothes -->
+      <div class="category-wrapper">
+        <h3 class="subsection-title">Women's Wear</h3>
+        <div class="category-grid">
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">👗</span>
+              <span class="alt-text">Women's Abaya</span>
+              <span class="badge">Elegant</span>
+            </div>
+            <div class="card-content">
+              <h3>Women's Abaya</h3>
+              <p>Elegant abayas in various styles and colors</p>
+              <ul class="card-features">
+                <li>Premium fabric</li>
+                <li>Modern & classic styles</li>
+                <li>Custom tailoring</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Women's%20Abaya" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">👧</span>
+              <span class="alt-text">Girl's Modest Wear</span>
+            </div>
+            <div class="card-content">
+              <h3>Girl's Modest Wear</h3>
+              <p>Beautiful modest clothing for young girls</p>
+              <ul class="card-features">
+                <li>Comfortable fit</li>
+                <li>Colorful designs</li>
+                <li>Ages 3-15</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Girl's%20Modest%20Wear" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="image-placeholder">
+              <span class="icon">🧕</span>
+              <span class="alt-text">Hijabs Collection</span>
+              <span class="badge">Popular</span>
+            </div>
+            <div class="card-content">
+              <h3>Hijabs Collection</h3>
+              <p>Wide variety of hijabs in different fabrics and styles</p>
+              <ul class="card-features">
+                <li>Chiffon & silk</li>
+                <li>Jersey & cotton</li>
+                <li>Ready-to-wear</li>
+              </ul>
+              <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Hijabs" target="_blank" class="card-btn">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Prayer Mats -->
+    <section class="catalogue-section" id="mats">
+      <div class="section-header">
+        <div class="section-icon">🧎</div>
+        <div>
+          <h2 class="section-title">Prayer Mats</h2>
+          <p class="section-subtitle">Quality prayer mats for every need</p>
+        </div>
+      </div>
+
+      <div class="subsection-grid">
+        <div class="product-card">
+          <div class="image-placeholder">
+            <span class="icon">⭐</span>
+            <span class="alt-text">Premium Prayer Mat</span>
+            <span class="badge">Premium</span>
+          </div>
+          <div class="card-content">
+            <h3>Premium Prayer Mats</h3>
+            <p>Luxurious thick prayer mats with beautiful designs</p>
+            <ul class="card-features">
+              <li>Soft cushioned</li>
+              <li>Non-slip backing</li>
+              <li>Islamic patterns</li>
+            </ul>
+            <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Premium%20Prayer%20Mats" target="_blank" class="card-btn">Request Quote</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="image-placeholder">
+            <span class="icon">✈️</span>
+            <span class="alt-text">Traveller Prayer Mat</span>
+          </div>
+          <div class="card-content">
+            <h3>Traveller Mats</h3>
+            <p>Portable, lightweight mats perfect for travel</p>
+            <ul class="card-features">
+              <li>Foldable design</li>
+              <li>Carry pouch included</li>
+              <li>Water-resistant</li>
+            </ul>
+            <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Traveller%20Prayer%20Mats" target="_blank" class="card-btn">Request Quote</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="image-placeholder">
+            <span class="icon">🏭</span>
+            <span class="alt-text">Plastic Printed Mats - Wholesale</span>
+            <span class="badge">Wholesale</span>
+          </div>
+          <div class="card-content">
+            <h3>Plastic Printed Mats</h3>
+            <p>Durable plastic mats ideal for mosques and bulk orders</p>
+            <ul class="card-features">
+              <li>Easy to clean</li>
+              <li>UV resistant</li>
+              <li>Bulk pricing</li>
+            </ul>
+            <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Plastic%20Printed%20Mats%20(Wholesale)" target="_blank" class="card-btn">Request Quote</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wholesale Info -->
+      <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold); border-radius: 12px; text-align: center;">
+        <h4 style="color: var(--foreground); margin-bottom: 0.5rem; font-size: 1.125rem;">🏭 Wholesale & Bulk Orders</h4>
+        <p style="color: var(--muted); font-size: 0.875rem; margin-bottom: 1rem;">Special pricing available for mosques, institutions, and large orders. Minimum order: 50 pieces.</p>
+        <a href="https://wa.me/256702445852?text=Hello,%20I'm%20interested%20in%20Wholesale%20Prayer%20Mats" target="_blank" class="btn-cta">Contact for Wholesale Pricing</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Can't Find What You Need?</h2>
+    <p>We source products globally. Contact us for custom orders and special requests.</p>
+    <a href="https://wa.me/256702445852?text=Hello,%20I%20have%20a%20custom%20order%20inquiry" target="_blank" class="btn-cta">Contact Us Now</a>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container">
+    <div class="footer-container">
       <div class="footer-grid">
+        <!-- Brand -->
         <div class="footer-brand">
-          <div class="logo">
+          <a href="/" class="logo">
             <div class="logo-icon">K</div>
-            <div class="logo-text">Kashasenasha <br>investment <span>Limited.</span></div>
-          </div>
-          <p>Empowering progress through diversified excellence. Your trusted partner for premium products and strategic investments in Uganda.</p>
+            <div class="logo-text">
+              <h1>Kashasenasha</h1>
+              <p>Investments Limited</p>
+            </div>
+          </a>
+          <p>Empowering progress through diversified excellence. A trusted partner for Trade & Commerce, Investment, and multi-sector growth in Uganda.</p>
         </div>
-        
+
+        <!-- Quick Links -->
         <div>
           <h4>Quick Links</h4>
           <ul class="footer-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#sectors">Our Sectors</a></li>
-            <li><a href="catalogue-page.html">Catalogue</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/trade">Trade & Commerce</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
-        
+
+        <!-- Sectors -->
         <div>
-          <h4>Products</h4>
+          <h4>Our Sectors</h4>
           <ul class="footer-links">
-            <li><a href="#">Prayer Mats</a></li>
-            <li><a href="#">Holy Quran</a></li>
-            <li><a href="#">Muslim Apparel</a></li>
-            <li><a href="#">Wholesale</a></li>
+            <li><a href="#">Trade & Commerce</a></li>
+            <li><a href="#">Investment & Finance</a></li>
+            <li><a href="#">ICT & Telecommunications</a></li>
+            <li><a href="#">Property & Construction</a></li>
+            <li><a href="#">Transport & Logistics</a></li>
           </ul>
         </div>
-        
+
+        <!-- Contact -->
         <div>
-          <h4>Contact</h4>
-          <ul class="footer-links">
-            <li><strong>Address:</strong><br>Ben Kiwanuka Street,<br>Nagatule Plaza,<br>RM 10, 11 &amp; 12,<br>Kampala, Uganda</li>
-           
-            <li> <strong>📞</strong> <a href="tel:+256702445852">+256 702 445 852</a></li>
-            <li><p><i class="fa-regular fa-envelope"></i> <a href="mailto:kashasenasha27@gmail.com">kashasenasha27@gmail.com</a></p></li>
+          <h4>Contact Us</h4>
+          <ul class="footer-contact">
+            <li>
+              <span class="icon">📍</span>
+              <span>Nagatule Plaza, Rooms 10, 11 & 12<br>Ben Kiwanuka Street<br>Kampala, Uganda</span>
+            </li>
+            <li>
+              <span class="icon">📞</span>
+              <a href="tel:+256702445852">+256 702 445 852</a>
+            </li>
+            <li>
+              <span class="icon">✉️</span>
+              <a href="mailto:kashasenasha27@gmail.com">kashasenasha27@gmail.com</a>
+            </li>
           </ul>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="Twitter">𝕏</a>
+          </div>
         </div>
       </div>
-      
-      <div class="footer-bottom">
-        <p>&copy;2026 Kashasenasha Investments Limited. All rights reserved.</p>
-        <p class="credit">Designed & Developed by Black House Media.</p>
 
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>© 2025 Kashasenasha Investments Limited. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
       </div>
     </div>
   </footer>
-  <script src="js.js"></script>
-       </body>
-       </html>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+
+    mobileMenuBtn.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileNav.classList.toggle('open');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!mobileMenuBtn.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileMenuBtn.classList.remove('active');
+        mobileNav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
