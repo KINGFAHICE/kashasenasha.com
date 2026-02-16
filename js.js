@@ -24,7 +24,7 @@ if (preloader) {
   window.addEventListener('load', () => {
     fakeProgress = 75;
   });
-}
+ }
 
 /* =====================================================
    DOM READY

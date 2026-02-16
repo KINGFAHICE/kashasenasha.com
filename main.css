@@ -1091,8 +1091,31 @@
       font-weight: 900;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgb(200, 0, 0);
+      color: white;
       pointer-events: none;
       text-align: center;
+      mix-blend-mode: difference;
+
+       background:rgb(0, 0, 0, 0.4) ;
+    }
+    #callup {
+      position: fixed;
+      inset: 0;
+      width: 100VW;
+      height: 100VH;
+      z-index: 2147483647;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      font-size: clamp(2rem, 8vw, 7rem);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: white;
+      pointer-events: none;
+      text-align: center;
+      mix-blend-mode: difference;
+      padding-bottom: 340px;
+     
       
     }
