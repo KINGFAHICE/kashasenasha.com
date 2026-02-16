@@ -1093,7 +1093,6 @@
       text-transform: uppercase;
       color: rgb(200, 0, 0);
       pointer-events: none;
-      -webkit-backdrop-filter: blur(2px);
-        backdrop-filter: blur(1.5px);
       text-align: center;
+      
     }
