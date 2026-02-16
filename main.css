@@ -1115,7 +1115,8 @@
       pointer-events: none;
       text-align: center;
       mix-blend-mode: difference;
-      padding-bottom: 340px;
+      padding-bottom: 40%;
+      padding-top: 50%;
      
       
     }
